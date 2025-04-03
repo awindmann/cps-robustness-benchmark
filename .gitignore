@@ -1,0 +1,17 @@
+venv
+__pycache__/
+/data/raw/
+/data/processed/
+/local_data/
+!.gitkeep
+*.ckpt
+*.pdf
+.idea
+.vscode
+poetry.toml
+.DS_Store
+
+logs
+runs
+.venv
+.ipynb_checkpoints
