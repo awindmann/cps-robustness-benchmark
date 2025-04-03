@@ -68,6 +68,6 @@ docker login gitlab.kiss.space.unibw-hamburg.de:4567 -u token-name -p token --tl
 
 ## push to registry
 ```sh
-docker push gitlab.kiss.space.unibw-hamburg.de:4567/kiss/robust-ai-validation:v09 --tls-varify=false
+docker push gitlab.kiss.space.unibw-hamburg.de:4567/kiss/robust-ai-validation:v31 --tls-varify=false
 ```
 
