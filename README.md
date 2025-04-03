@@ -1,4 +1,6 @@
-# Robustness Validation for Industrial AI
+# AI Robustness Benchmark for Cyber-Physical Systems
+
+*the repository is still work in progress*
 
 ## Get started
 ### Install the dependencies
@@ -56,7 +58,7 @@ poetry run python run_finetuning.py  --LOG_DIR logs/<your-path>
 
 ## Build the image:
 ```sh
-docker build . --platform=linux/amd64 -t gitlab.kiss.space.unibw-hamburg.de:4567/kiss/robust-ai-validation:v09
+docker build . --platform=linux/amd64 -t gitlab.kiss.space.unibw-hamburg.de:4567/kiss/robust-ai-validation:v31
 ```
 
 ## Login to gitlab registry
