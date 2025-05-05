@@ -7,6 +7,9 @@ requires-python = ">=3.11"
 dependencies = [
     "boto3>=1.38.8",
     "einops>=0.8.1",
+    "ipdb>=0.13.13",
+    "ipykernel>=6.29.5",
+    "jupyter>=1.1.1",
     "kaleido==0.2.0",
     "kfp>=2.13.0",
     "kfp-kubernetes>=1.5.0",
@@ -17,6 +20,7 @@ dependencies = [
     "networkx>=3.4.2",
     "openpyxl>=3.1.5",
     "pandas>=2.2.3",
+    "pdbpp>=0.11.6",
     "plotly>=6.0.1",
     "pyarrow>=19.0.1",
     "pytorch-lightning>=2.5.1.post0",
