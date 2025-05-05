@@ -10,6 +10,7 @@ __pycache__/
 .vscode
 poetry.toml
 .DS_Store
+requirements.txt
 
 logs
 runs
