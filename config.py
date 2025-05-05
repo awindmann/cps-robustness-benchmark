@@ -3,11 +3,11 @@
 
 DATA_PATH = [
     "s3://alexander-windmann-data/ETTh1.csv",
-    "s3://alexander-windmann-data/ETTm1.csv",
-    "s3://alexander-windmann-data/electricity.csv",
-    "s3://alexander-windmann-data/SKAB_anomaly_free.csv",
-    "s3://alexander-windmann-data/water_quality.csv",
-    "s3://alexander-windmann-data/SWaT_Dataset_Normal_v1.parquet",
+    # "s3://alexander-windmann-data/ETTm1.csv",
+    # "s3://alexander-windmann-data/electricity.csv",
+    # "s3://alexander-windmann-data/SKAB_anomaly_free.csv",
+    # "s3://alexander-windmann-data/water_quality.csv",
+    # "s3://alexander-windmann-data/SWaT_Dataset_Normal_v1.parquet",
 
     # "s3://alexander-windmann-data/damadics.csv",
     # "s3://alexander-windmann-data/WADI_14days.csv",
