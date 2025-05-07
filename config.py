@@ -3,21 +3,14 @@
 
 DATA_PATH = [
     "s3://alexander-windmann-data/ETTh1.csv",
-    # "s3://alexander-windmann-data/ETTm1.csv",
-    # "s3://alexander-windmann-data/electricity.csv",
-    # "s3://alexander-windmann-data/SKAB_anomaly_free.csv",
-    # "s3://alexander-windmann-data/water_quality.csv",
-    # "s3://alexander-windmann-data/SWaT_Dataset_Normal_v1.parquet",
-
-    # "s3://alexander-windmann-data/damadics.csv",
-    # "s3://alexander-windmann-data/WADI_14days.csv",
-    # "s3://alexander-windmann-data/three_tank_data.csv",
-    # "s3://alexander-windmann-data/ETTh2.csv",
-    # "s3://alexander-windmann-data/ETTm2.csv",
+    "s3://alexander-windmann-data/ETTm1.csv",
+    "s3://alexander-windmann-data/electricity.csv",
+    "s3://alexander-windmann-data/SKAB_anomaly_free.csv",
+    "s3://alexander-windmann-data/water_quality.csv",
+    "s3://alexander-windmann-data/SWaT_Dataset_Normal_v1.parquet",
 ]
-LOGDIR = "http://mlflow-server.alexander-windmann.svc.cluster.local"
+LOGDIR = "http://mlflow-server.alexander-windmann.svc.cluster.local"  # if local: "runs" etc.
 MINIO_ENDPOINT = "http://minio.minio"
-# MLFLOW_EXPERIMENT_PREFIX = "test-09"
 MLFLOW_EXPERIMENT_PREFIX = "param-test-02"
 LOG_EVERY_N_STEPS = 1
 SAVE_CHECKPOINT = True
