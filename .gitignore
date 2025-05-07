@@ -1,7 +1,5 @@
 venv
 __pycache__/
-/data/raw/
-/data/processed/
 /local_data/
 !.gitkeep
 *.ckpt
@@ -11,8 +9,6 @@ __pycache__/
 poetry.toml
 .DS_Store
 requirements.txt
-
-logs
 runs
 .venv
 .ipynb_checkpoints
