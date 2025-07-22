@@ -9,7 +9,6 @@ import torch
 import pytorch_lightning as pl
 from pytorch_lightning.loggers import MLFlowLogger
 import mlflow
-from pytorch_lightning.profilers import SimpleProfiler, AdvancedProfiler  #TODO profiler
 
 import models
 from data.data_module import TSDataModule
@@ -133,7 +132,7 @@ def test_on_dataset(dataset, args):
                 log_every_n_steps=args.log_every_n_steps,
                 logger=logger,
                 default_root_dir=defaul_root_dir,
-                # profiler=AdvancedProfiler(filename="0/profiler-results")
+                
                 )
 
             if trainer.strategy.root_device.type == "cuda":
@@ -202,55 +201,6 @@ def meta_analysis(args):
     print(model_results_df)
     print(data_results_df)
 
-    # Compute correlation between val->test drop and robustness score
-    result_df["val_to_test_drop_abs"] = result_df[f"{args.test_metric}_val"] - result_df[f"{args.test_metric}_test"]
-    result_df["val_to_test_drop"] = result_df["val_to_test_drop_abs"] / result_df[f"{args.test_metric}_val"]
-    # compute per-model correlations and p-values if possible
-    def compute_corr(data):  # helper function
-        count = len(data)
-        if count > 2:
-            correlation, p_value = pearsonr(
-                data["val_to_test_drop"],
-                data[f"robustness_score_{version}_{args.test_metric}"]
-            )
-        else:
-            correlation, p_value = None, None
-        return pd.Series({
-            "count": count,
-            "correlation": correlation,
-            "p_value": p_value
-        })
-    # model correlation
-    model_corr_per_mode = []
-    for version in ["min", "mean", "prod"]:
-        corr = compute_corr(result_df)
-        correlation_df = pd.DataFrame([{
-            "model": "all",
-            "count": corr["count"],
-            "correlation": corr["correlation"],
-            "p_value": corr["p_value"]
-        }]).set_index("model")
-        model_corr_df = result_df.set_index("model").groupby("model").apply(compute_corr)
-        correlation_df = pd.concat([correlation_df, model_corr_df]).astype({'count': 'int32'})
-        model_corr_per_mode.append(correlation_df)
-        print(f"\nModel correlation of {version}.")
-        print(correlation_df)
-    # dataset correlation
-    data_corr_per_mode = []
-    for version in ["min", "mean", "prod"]:
-        corr = compute_corr(result_df)
-        correlation_df = pd.DataFrame([{
-            "dataset": "all",
-            "count": corr["count"],
-            "correlation": corr["correlation"],
-            "p_value": corr["p_value"]
-        }]).set_index("dataset")
-        data_corr_df = result_df.set_index("dataset").groupby("dataset").apply(compute_corr)
-        correlation_df = pd.concat([correlation_df, data_corr_df]).astype({'count': 'int32'})
-        data_corr_per_mode.append(correlation_df)
-        print(f"\nDataset correlation of {version}.")
-        print(correlation_df)
-
     # log
     mlflow.set_experiment("Meta Analysis")
     with mlflow.start_run(run_name=f"{args.mlflow_experiment_prefix}-{args.test_metric}"):
@@ -259,10 +209,6 @@ def meta_analysis(args):
         mlflow.log_dict(data_results_df.reset_index().to_dict(orient="list"), f"dataset_results_{args.test_metric}.json")
         mlflow.log_dict(scenario_df.reset_index().to_dict(orient="list"), f"scenario_results_{args.test_metric}.json")
         mlflow.log_figure(hist_plot, artifact_file=f"scenario_rel_perf_{args.test_metric}.pdf")
-        for version, df in zip(["min", "mean", "prod"], model_corr_per_mode):
-            mlflow.log_dict(df.reset_index().to_dict(orient="list"), f"model_correlations_{args.test_metric}_{version}.json")
-        for version, df in zip(["min", "mean", "prod"], data_corr_per_mode):
-            mlflow.log_dict(df.reset_index().to_dict(orient="list"), f"data_correlations_{args.test_metric}_{version}.json")
     
     print("\nDone.")
 

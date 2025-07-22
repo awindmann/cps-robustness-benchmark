@@ -65,8 +65,7 @@ def plot_sample_forecast(sample, fcast, feature_names=None, title=None, display=
             line=dict(color=color, dash="dash")
         ))
 
-    fig.add_vline(x=x1.shape[0], line=dict(color="black", width=2, dash="dash"), 
-                  annotation_text="Prediction Start", annotation_position="top right")  # TODO does not work for fcast overview?
+    
     fig.update_xaxes(title_text='Time')
     fig.update_layout(width=800, height=500, title=title, 
                       font_family="Serif", font_size=14,
@@ -111,41 +110,7 @@ def fcast_overview(datamodule, model, idx=0, title=None, save_path=None):
         fig.show()
 
 
-# def plot_performance_scores(performance_scores, metric_name):
-#     fig = go.Figure()
-#     quantile_cols = ["min_perf_score", "q25_perf_score", "q50_perf_score", "q75_perf_score", "max_perf_score"]
-#     colors = ["rgba(150,0,0,0.4)", "rgba(150,0,0,0.3)", "rgba(150,0,0,0.2)", "rgba(150,0,0,0.1)"]
-#     # Plot the worst performance score
-#     fig.add_trace(go.Scatter(
-#         x=performance_scores.index,
-#         y=performance_scores["min_perf_score"],
-#         mode="lines",
-#         line=dict(width=3.5, color="red"), 
-#         name="min_perf_score"
-#     ))
-#     # Plot the other performance scores    
-#     for i in range(1, len(performance_scores.columns)):
-#         fig.add_trace(go.Scatter(
-#             x=performance_scores.index,
-#             y=performance_scores[quantile_cols[i]],
-#             mode="lines",
-#             fill="tonexty",
-#             fillcolor=colors[i-1],
-#             line=dict(width=0, color=colors[i-1]),
-#             name=quantile_cols[i]
-#         ))
-#     fig.update_layout(
-#         title=f"Performance Scores Across Severity Levels Using {metric_name}",
-#         xaxis_title="Severity Level",
-#         yaxis_title="Performance Score",
-#         yaxis_range=[0, 1],
-#         font_family="Serif", 
-#         font_size=14,
-#         margin=dict(l=5, t=50, b=5, r=5),
-#         showlegend=True,
-#         legend_traceorder="normal",
-#     )
-#     return fig
+
 
 
 def plot_scenario_performance(result_df, metric_name, model_architecture):
@@ -172,7 +137,7 @@ def plot_scenario_performance(result_df, metric_name, model_architecture):
     fig.update_layout(
         width=600, height=350,
         title={"text": f"Relative Performance of {model_architecture} Across Severity Levels", "y": 0.95, "x": 0.5, "xanchor": "center", "yanchor": "top"},
-        # title={"text": f"Relative Performance Based on {metric_name} Across Severity Levels for {model_architecture}", "y": 0.95, "x": 0.5, "xanchor": "center", "yanchor": "top"},
+        
         xaxis_title="Severity Level",
         yaxis_title="Relative Performance",
         yaxis_range=[0, 1.1],
@@ -220,7 +185,7 @@ def plot_scenario_performance_hist(scenario_df, metric_name):
     fig.update_layout(
         width=1200, height=500,
         title={"text": f"Disturbance Robustness Scores Across Scenarios", "y": 0.95, "x": 0.5, "xanchor": "center", "yanchor": "top"},
-        # title={"text": f"Disturbance Robustness Scores Based on {metric_name} Across Scenarios", "y": 0.95, "x": 0.5, "xanchor": "center", "yanchor": "top"},
+        
         font=dict(size=20),
         font_family="Serif", 
         title_font=dict(size=24),
@@ -295,7 +260,7 @@ def plot_performance_scores(performance_scores, metric_name):
     ))
     fig.update_layout(
         title=f"Relative Performance Across Severity Levels",
-        # title=f"Relative Performance Across Severity Levels Using {metric_name}",
+        
         xaxis_title="Severity Level",
         yaxis_title="Relative Performance",
         yaxis_range=[0, 1],

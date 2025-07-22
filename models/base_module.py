@@ -32,8 +32,7 @@ class BaseLitModule(pl.LightningModule):
                  d_features, d_seq_in=250, d_seq_out=50,
                  test_dataloader_mapping=None,
                  lr=1e-3, lr_scheduler=False,
-                 beta1=0.9, beta2=0.999, eps=1e-8,
-                 **kwargs  #TODO remove, for backwards compatibility
+                 beta1=0.9, beta2=0.999, eps=1e-8
                  ):
         super().__init__()
 
@@ -142,7 +141,7 @@ class BaseLitModule(pl.LightningModule):
         normal_performance = result_df[result_df.scenario=="normal"]["loss"].values[0]  # performance on test dataset without disturbances
         self.logger.experiment.log_metric(self.logger.run_id, f"{self.test_metric}_test", normal_performance)
         result_df["rel_perf"] = (1e-6 + normal_performance) / (1e-6 + result_df["loss"])
-        # self.logger.experiment.log_dict(self.logger.run_id, result_df.reset_index().to_dict(orient="list"), artifact_file=f"all_test_results_{self.test_metric}.json")
+        
         fig = plot_scenario_performance(result_df, self.test_metric, self.model_architecture)
         self.logger.experiment.log_figure(self.logger.run_id, fig, artifact_file=f"scenario_rel_perf_{self.test_metric}.pdf")
 
@@ -156,7 +155,7 @@ class BaseLitModule(pl.LightningModule):
         
         # free memory
         self.test_step_outputs = pd.DataFrame(columns=["dataloader_idx", "loss"])
-        del result_df, normal_performance, rel_perf_df, #severity_stats, performance_scores TODO remove if deleted
+        del result_df, normal_performance, rel_perf_df
 
     def configure_optimizers(self):
         optimizer = Adam(

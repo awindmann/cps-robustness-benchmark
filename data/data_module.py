@@ -158,10 +158,7 @@ class TSDataModule(pl.LightningDataModule):
                 print("First column is not a valid datetime. Keeping the default index.")
         else:
             raise ValueError("File format not supported.")
-        # fcols = df_all.select_dtypes("float").columns
-        # df_all[fcols] = df_all[fcols].apply(pd.to_numeric, downcast="float")
-        # icols = df_all.select_dtypes("integer").columns
-        # df_all[icols] = df_all[icols].apply(pd.to_numeric, downcast="integer")
+        
             
         self.n_features = df_all.shape[1]
 

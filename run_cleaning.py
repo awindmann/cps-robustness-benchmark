@@ -37,7 +37,7 @@ def clean(dataset, args):
             for run in runs[args.n_to_keep:]:
                 s3 = s3fs.S3FileSystem(key=os.environ.get('AWS_ACCESS_KEY_ID'), secret=os.environ.get('AWS_SECRET_ACCESS_KEY'), client_kwargs={"endpoint_url": args.minio_endpoint})
                 checkpoint_path = s3.glob(run.info.artifact_uri + "/*/*.ckpt")
-                # checkpoint_path = s3.glob(run.info.artifact_uri + "/model/checkpoints/*/*.ckpt")
+                
                 checkpoint_path = ["s3://" + path for path in checkpoint_path]
                 if len(checkpoint_path) == 0:
                     continue

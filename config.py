@@ -2,16 +2,17 @@
 # run_training.py
 
 DATA_PATH = [
-    "s3://alexander-windmann-data/ETTh1.csv",
-    "s3://alexander-windmann-data/ETTm1.csv",
-    "s3://alexander-windmann-data/electricity.csv",
-    "s3://alexander-windmann-data/SKAB_anomaly_free.csv",
-    "s3://alexander-windmann-data/water_quality.csv",
-    "s3://alexander-windmann-data/SWaT_Dataset_Normal_v1.parquet",
+    "data/processed/ETTh1.csv",
+    "data/processed/ETTm1.csv",
+    "data/processed/electricity.csv",
+    "data/processed/SKAB_anomaly_free.csv",
+    "data/processed/water_quality.csv",
+    "data/processed/SWaT_Dataset_Normal_v1.parquet",
+    # "data/processed/three_tank_data.csv"
 ]
-LOGDIR = "http://mlflow-server.alexander-windmann.svc.cluster.local"  # if local: "runs" etc.
+LOGDIR = "runs"
 MINIO_ENDPOINT = "http://minio.minio"
-MLFLOW_EXPERIMENT_PREFIX = "param-test-02"
+MLFLOW_EXPERIMENT_PREFIX = "param-test-01"
 LOG_EVERY_N_STEPS = 1
 SAVE_CHECKPOINT = True
 RETRAIN = False  # whether to retrain a model if that hparam combination on that dataset has already be trained

@@ -22,7 +22,7 @@ class DriftDataset(TSDataset):
         min_offset = 0.
         max_offset = 1.
         offset = min_offset + severity * (max_offset - min_offset)
-        # offset = np.linspace(offset, 0, self.input_len)
+        
 
         return affected_sensors, offset
 
@@ -42,7 +42,7 @@ class DyingSignalDataset(TSDataset):
         assert 0 <= severity <= 1, "Severity must be between 0 and 1."
         self.severity = severity
         self.target_prct_affected_sensors = target_prct_affected_sensors
-        # self.target_prct_affected_sensors = min(target_prct_affected_sensors * 5, 1)  # no disturbance if flat sensor is hit, therefore we increase the percentage here
+        
         self.affected_sensors, self.factor = self.set_params(severity)
 
     def set_params(self, severity):
@@ -54,7 +54,7 @@ class DyingSignalDataset(TSDataset):
         min_factor = 1.
         max_factor = 0.
         factor = min_factor + severity * (max_factor - min_factor)
-        # factor = np.linspace(factor, 1, self.input_len)
+        
 
         return affected_sensors, factor
 

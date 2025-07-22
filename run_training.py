@@ -8,7 +8,7 @@ import torch
 import pytorch_lightning as pl
 from pytorch_lightning.loggers import MLFlowLogger
 from pytorch_lightning.callbacks import ModelCheckpoint, LearningRateMonitor, EarlyStopping
-# from pytorch_lightning.profilers import SimpleProfiler, AdvancedProfiler  TODO profiler
+
 import mlflow
 
 import config as config
@@ -81,8 +81,7 @@ def train_model(model_architecture, hparams, dataset, args):
     )
     if args.lr_scheduler:
         callbacks.append(LearningRateMonitor())
-    # profiler = SimpleProfiler(filename="last-run-profiler-results")
-    # profiler = AdvancedProfiler(filename="profiler-results")
+    
 
     trainer = pl.Trainer(
         enable_checkpointing=True if args.save_checkpoint else False,
@@ -92,8 +91,7 @@ def train_model(model_architecture, hparams, dataset, args):
         precision=args.precision,
         log_every_n_steps=args.log_every_n_steps,
         callbacks=callbacks,
-        logger=logger,
-        # profiler=profiler
+        logger=logger
         )
     if trainer.strategy.root_device.type == "cuda":
         torch.set_float32_matmul_precision('medium')

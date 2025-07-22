@@ -1,6 +1,6 @@
 # AI Robustness Benchmark for Cyber-Physical Systems
 
-*This repository is still a work in progress*
+
 
 ## Folder Structure
 ```
@@ -53,7 +53,7 @@ There are three main scripts that can be used to interact with our package:
 All of them do what their names promise (the cleaning script is optional and removes model
 checkpoints from MLflow that are not needed anymore).
 
-The training and testing scripts both accept command line arguments (click).
+The training and testing scripts both accept command line arguments.
 However, if not executed with any arguments, they will use the defaults
 specified in the config file `./config.py`.
 
@@ -87,7 +87,7 @@ To use Kubeflow, we need container images. These can be built as follows:
 First, export the requirements to a txt file (since we won't be using uv in the
 container build):
 ```sh
-uv export > requirements.txt
+uv pip compile pyproject.toml -o requirements.txt
 ```
 Then build the image like so (assuming you're using Docker):
 ```sh
