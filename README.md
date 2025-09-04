@@ -1,6 +1,6 @@
 # AI Robustness Benchmark for Cyber-Physical Systems
 
-
+Code for the paper "Quantifying Robustness: A Benchmarking Framework for Deep Learning Forecasting in Cyber-Physical Systems", presented at ETFA 2025. See the preprint [here](https://arxiv.org/abs/2504.03494).
 
 ## Folder Structure
 ```
